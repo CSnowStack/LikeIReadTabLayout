@@ -8,10 +8,22 @@
     android:orientation="vertical"
     tools:context="csnowstack.likeireadtablayout.MainActivity">
 
-    <csnowstack.likeireadtablayout.design.TabLayout
+    <csnowstack.likeireadtablayout.CustomerTabLayout
+        android:background="#1DA9FC"
         android:id="@+id/tab"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        app:tab_padding_bottom="10dp"
+        app:tab_padding_left="15dp"
+        app:tab_padding_right="15dp"
+        app:tab_padding_top="10dp"
+        app:tab_text_size="18sp"
+        app:tab_indicator_size="0.5"
+        app:tab_indicator_height="3dp"
+        app:tab_color_normal="#7aFFFFFF"
+        app:tab_color_selected="@android:color/white"
+        />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"

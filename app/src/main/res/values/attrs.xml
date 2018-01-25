@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="TabItem">
-        <attr name="text" format="string"/>
+
+    <declare-styleable name="CustomerTabLayout">
+        <attr name="tab_color_normal" format="reference|color"/>
+        <attr name="tab_color_selected" format="reference|color"/>
+        <attr name="tab_padding_left" format="dimension"/>
+        <attr name="tab_padding_right" format="dimension"/>
+        <attr name="tab_padding_top" format="dimension"/>
+        <attr name="tab_padding_bottom" format="dimension"/>
+        <attr name="tab_text_size" format="dimension"/>
+        <attr name="tab_indicator_size" format="float"/>
+        <attr name="tab_indicator_height" format="dimension"/>
     </declare-styleable>
 </resources>

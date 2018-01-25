@@ -11,10 +11,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
- * Created by cq on 2016/12/30.
+ *
  */
 
-public class WebFragment extends Fragment{
+public class WebFragment extends Fragment {
     private WebView mWebView;
     @Nullable
     @Override
