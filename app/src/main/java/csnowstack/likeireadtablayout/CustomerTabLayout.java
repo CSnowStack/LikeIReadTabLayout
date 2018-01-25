@@ -25,10 +25,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
 import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
 
 /**
  * bug还是有的
+ *
+ * 不想改呀
+ * 抄自 TabLayout
  */
 
 public class CustomerTabLayout extends View {
@@ -425,7 +429,7 @@ public class CustomerTabLayout extends View {
             float indicatorEndXRight = indicatorEndX + mTextWidth.get(mNextSelected) * mIndicatorSize;
 
 
-            float left = 0, right = 0;
+            float left, right;
             if (proportion <= .5f) {//0~0.5, 指示器开始点移动到next的x
                 proportion = 2 * proportion;
 
@@ -673,10 +677,15 @@ public class CustomerTabLayout extends View {
     }
 
 
+    /**
+     * 抄自
+     * http://www.wangyuwei.me/2017/12/09/%E4%BD%BF%E7%94%A8%E7%B3%BB%E7%BB%9FTabLayout%E7%9A%84app%E5%BF%AB%E6%9D%A5%E4%BF%AEBug/
+     */
     public static class TabLayoutOnPageChangeListener implements ViewPager.OnPageChangeListener {
         private final WeakReference<CustomerTabLayout> mTabLayoutRef;
         private int mPreviousScrollState;
         private int mScrollState;
+        private boolean isTouchState;
 
         public TabLayoutOnPageChangeListener(CustomerTabLayout tabLayout) {
             mTabLayoutRef = new WeakReference<>(tabLayout);
@@ -686,13 +695,19 @@ public class CustomerTabLayout extends View {
         public void onPageScrollStateChanged(final int state) {
             mPreviousScrollState = mScrollState;
             mScrollState = state;
+
+            if (state == SCROLL_STATE_DRAGGING) {
+                isTouchState = true;
+            } else if (state == SCROLL_STATE_IDLE) {
+                isTouchState = false;
+            }
         }
 
         @Override
         public void onPageScrolled(final int position, final float positionOffset,
                                    final int positionOffsetPixels) {
             final CustomerTabLayout tabLayout = mTabLayoutRef.get();
-            if (tabLayout != null) {
+            if (tabLayout != null &&isTouchState) {
                 tabLayout.setScrollPosition(position, positionOffset);
             }
         }
@@ -825,8 +840,4 @@ public class CustomerTabLayout extends View {
         }
     }
 
-    private void removeAllTabs() {
-        mTitles.clear();
-
-    }
 }
